@@ -20,3 +20,66 @@ Add base react code without using creat-react-app
 ```
 > ./node_modules/.bin/tsc --init  
 ```
+
+appshell written in react
+
+prereq:
+- .vscode/workspace settings
+- .prettierrc
+- .npmrc
+- .gitignore
+- public folder
+
+
+create a react application from scratch:
+
+```
+> npm init -y
+> npm i react react-dom
+
+> npm i -D @babel/plugin-transform-runtime \
+  @babel/preset-env \
+  @babel/preset-react \
+  @babel/preset-typescript \
+  @types/node \
+  @types/react \
+  @types/react-dom \
+  @typescript-eslint/eslint-plugin \
+  @typescript-eslint/parser \
+  babel-loader \
+  copy-webpack-plugin \
+  css-loader \
+  eslint \
+  eslint-plugin-react \
+  eslint-plugin-react-hooks \
+  eslint-webpack-plugin \
+  html-webpack-plugin \
+  mini-css-extract-plugin \
+  prettier \
+  style-loader \
+  ts-loader \
+  ts-node \
+  tsconfig-paths-webpack-plugin \
+  typescript \
+  webpack \
+  webpack-cli \
+  webpack-dev-server
+```
+
+```
+> ./node_modules/.bin/tsc --init
+```
+
+Things to change in tsconfig.ts:
+-  "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+    "jsx": "react",
+    "baseUrl": "./src",
+    "resolveJsonModule": true,
+    "noImplicitAny": true
+
+- copy src folder
+- create webpack.config.ts
