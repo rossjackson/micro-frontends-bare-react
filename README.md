@@ -4,9 +4,9 @@ Micro frontends (Micro Front-ends) extends the concepts of microservices to the 
 This is a bare monorepo implementation of micro-frontends using React as the host / app shell and 2 remote applications (React and Angular) written in TypeScript.  I have made it monorepo so that you can see it in one location but you can definitely split this into its own github repository.
 
 The design is very straight forward.  React application on the left side of the screen and the right side is Angular.
+<img width="1543" alt="image" src="https://user-images.githubusercontent.com/3269153/212500149-2910d5ff-8aaf-4bea-996c-7684890ad0e4.png">
 
 You can add more application like Vue, Svelte, or even web components!
-
 
 ## Implementation
 
