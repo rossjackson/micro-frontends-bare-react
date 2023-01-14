@@ -27,14 +27,8 @@ const config: Configuration = {
             remotes: {
                 // This could be a URL pointed to a CDN
                 leftPanel: 'leftPanel@http://localhost:3010/remoteEntry.js',
-            },
-            shared: {
-                'react/': {
-                    singleton: true,
-                },
-                'react-dom/': {
-                    singleton: true,
-                },
+                angularRightPanel:
+                    'angularRightPanel@http://localhost:4200/remoteEntry.js',
             },
         }),
         new HtmlWebpackPlugin({

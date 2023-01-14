@@ -1,9 +1,14 @@
-import React, { lazy, Suspense } from 'react'
+import { mount } from 'angularRightPanel/mount'
+import React, { lazy, Suspense, useEffect } from 'react'
 import './App.css'
 
 const LeftPanel = lazy(() => import('leftPanel/App'))
 
-function App() {
+const App = () => {
+    useEffect(() => {
+        mount()
+    }, [])
+
     return (
         <div className="App">
             <div
@@ -11,7 +16,6 @@ function App() {
                     display: 'flex',
                     height: '100%',
                     width: '100%',
-                    backgroundColor: 'yellow',
                 }}
             >
                 <div style={{ display: 'flex', flex: 1 }}>
@@ -19,7 +23,12 @@ function App() {
                         <LeftPanel />
                     </Suspense>
                 </div>
-                <div style={{ display: 'flex', flex: 1 }}></div>
+                <div style={{ display: 'flex', flex: 1 }}>
+                    <div style={{ position: 'absolute' }}>
+                        {/* @ts-ignore */}
+                        <app-root></app-root>
+                    </div>
+                </div>
             </div>
         </div>
     )
