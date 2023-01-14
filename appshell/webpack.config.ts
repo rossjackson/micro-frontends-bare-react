@@ -2,9 +2,8 @@ import CopyPlugin from 'copy-webpack-plugin'
 import ESLintPlugin from 'eslint-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import path from 'path'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
-import { Configuration } from 'webpack'
+import { Configuration, container } from 'webpack'
 import 'webpack-dev-server'
 
 const isProduction = process.env.NODE_ENV == 'production'
@@ -16,31 +15,28 @@ const stylesHandler = isProduction
 const config: Configuration = {
     entry: './src/index',
     output: {
-        path: path.resolve(__dirname, 'public'),
+        publicPath: 'auto',
     },
     devServer: {
         open: true,
-        host: 'localhost',
         port: 3000,
     },
     plugins: [
-        // new container.ModuleFederationPlugin({
-        //     name: 'Remote',
-        //     filename: 'moduleEntry.js',
-        //     exposes: {
-        //         App: './src/App',
-        //     },
-        //     shared: {
-        //         react: {
-        //             singleton: true,
-        //             requiredVersion: dependencies['react'],
-        //         },
-        //         'react-dom': {
-        //             singleton: true,
-        //             requiredVersion: dependencies['react-dom'],
-        //         },
-        //     },
-        // }),
+        new container.ModuleFederationPlugin({
+            name: 'AppShell',
+            remotes: {
+                // This could be a URL pointed to a CDN
+                leftPanel: 'leftPanel@http://localhost:3010/remoteEntry.js',
+            },
+            shared: {
+                'react/': {
+                    singleton: true,
+                },
+                'react-dom/': {
+                    singleton: true,
+                },
+            },
+        }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
         }),
