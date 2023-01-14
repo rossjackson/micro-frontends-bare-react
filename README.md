@@ -83,3 +83,7 @@ Things to change in tsconfig.ts:
 
 - copy src folder
 - create webpack.config.ts
+- create .babelrc
+- create .eslintrc.json
+
+- update scripts
