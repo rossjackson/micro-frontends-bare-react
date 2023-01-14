@@ -4,8 +4,9 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
-import { Configuration } from 'webpack'
+import { Configuration, container } from 'webpack'
 import 'webpack-dev-server'
+import { dependencies } from './package.json'
 
 const isProduction = process.env.NODE_ENV == 'production'
 
@@ -14,17 +15,33 @@ const stylesHandler = isProduction
     : 'style-loader'
 
 const config: Configuration = {
-    entry: './src/index.tsx',
+    entry: './src/index',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'public'),
     },
     devServer: {
         open: true,
         host: 'localhost',
         port: 3001,
-        watchFiles: ['index.html', 'src/**/*'],
     },
     plugins: [
+        new container.ModuleFederationPlugin({
+            name: 'Remote',
+            filename: 'moduleEntry.js',
+            exposes: {
+                App: './src/App',
+            },
+            shared: {
+                react: {
+                    singleton: true,
+                    requiredVersion: dependencies['react'],
+                },
+                'react-dom': {
+                    singleton: true,
+                    requiredVersion: dependencies['react-dom'],
+                },
+            },
+        }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
         }),
@@ -68,6 +85,7 @@ const config: Configuration = {
         plugins: [new TsconfigPathsPlugin()],
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
+    target: 'web',
 }
 
 module.exports = () => {

@@ -55,6 +55,7 @@ const config: Configuration = {
     resolve: {
         extensions: ['.ts', '.js'],
     },
+    target: 'web',
 }
 
 module.exports = () => {
