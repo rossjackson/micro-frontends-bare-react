@@ -100,7 +100,7 @@ What this is saying is that it will run the `AppModule` when you call `mount()`.
 
 
 ### `appshell`
-The app shell is the host application.  All these applications, whether a remote or a host can share and expose components they way they want but normally, you would want the host to only consume.
+The app shell is the host application.  All these applications, whether a remote or a host can share and expose components but normally, you would want the host to only consume.
 ```
         new container.ModuleFederationPlugin({
             name: 'AppShell',
